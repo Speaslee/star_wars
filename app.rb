@@ -4,7 +4,6 @@ require './db/setup'
 require './lib/all'
 
 class App < Sinatra::Base
-
   get "/:name" do
     s_name = params[:name]
     Character.where ({name: "Spock"})
