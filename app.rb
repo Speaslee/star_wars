@@ -8,7 +8,7 @@ class App < Sinatra::Base
 
   get "/character/:name" do
     s_name = params[:name]
-    Character.where ({name: "Spock"})
+    Character.where ({name: s_name})
 
 
      {
@@ -37,7 +37,7 @@ class App < Sinatra::Base
   #   { name: u.name }
   #
   #   {
-  #     results= {
+  #     results= [{
   #     name: s.name,
   #     species: s.species,
   #     gender: s.gender,
@@ -45,28 +45,28 @@ class App < Sinatra::Base
   #     image_url: s.image_url,
   #     affiliation: affiliation_hashes
   #
-  #   }
+  #   }]
   # }.to_json
   #
 
   end
 
-
-  get "/affiliation/:affiliation" do
-    t_name = params[:affiliation]
-    t = Affiliation.find t_name
-
-    character_hashes = t.characters.map do |u|
-      { name: u.name }
-    end
-
-    {
-      results = {
-        name: t.name,
-        characters: character_hashes
-    }
-  }.to_json
-  end
+  #
+  # get "/affiliation/:affiliation" do
+  #   t_name = params[:affiliation]
+  #   t = Affiliation.find t_name
+  #
+  #   character_hashes = t.characters.map do |u|
+  #     { name: u.name }
+  #   end
+  #
+  #   {
+  #     results = [{
+  #       name: t.name,
+  #       characters: character_hashes
+  #   }]
+  # }.to_json
+  # end
 end
 
 App.run!
