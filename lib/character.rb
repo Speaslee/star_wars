@@ -6,7 +6,7 @@ validates_uniqueness_of :name
 
 has_many :memberships
 has_many :affiliations, through: :memberships
-
+#all of this is terrible, never do this. Abandon hope all ye who enter here
   def populate_table
     agent = Mechanize.new
     page1 = agent.get "http://starwars.wikia.com/"
