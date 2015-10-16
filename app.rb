@@ -30,24 +30,24 @@ class App < Sinatra::Base
     }]
   }.to_json
 
-  s_name = params[:name]
-  s = Character.find "name"
-
-  affiliation_hashes = t.affiliations.map do |u|
-    { name: u.name }
-
-    {
-      results= {
-      name: s.name,
-      species: s.species,
-      gender: s.gender,
-      homeworld: s.homeworld,
-      image_url: s.image_url,
-      affiliation: affiliation_hashes
-
-    }
-  }.to_json
-
+  # s_name = params[:name]
+  # s = Character.find "name"
+  #
+  # affiliation_hashes = t.affiliations.map do |u|
+  #   { name: u.name }
+  #
+  #   {
+  #     results= {
+  #     name: s.name,
+  #     species: s.species,
+  #     gender: s.gender,
+  #     homeworld: s.homeworld,
+  #     image_url: s.image_url,
+  #     affiliation: affiliation_hashes
+  #
+  #   }
+  # }.to_json
+  #
 
   end
 
