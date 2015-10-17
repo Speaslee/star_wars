@@ -55,7 +55,7 @@ class Character < ActiveRecord::Base
           next
         elsif l.href.include?("jedipedia")
           next
-        elsif l.href.include?("Category")== false && l.href.include?("Special")== false && l.href.include?("Wookieepedia")== false
+        elsif l.href.include?("Category")== false && l.href.include?("Special")== false && l.href.include?("Wookieepedia")== false && !potential_character_links.include?(l)
           potential_character_links.push l
           next
         elsif l.href.include?("Category")&& l.href.include?("Individuals_by_faction")== false
@@ -74,7 +74,7 @@ class Character < ActiveRecord::Base
         sub_sub_categories.shift
         sub_categories.push(nu_page)
       end
-      if !sub_sub_categories.any?
+      if !sub_sub_categories.any? || visited_page.count == 300
         break
       end
     end
@@ -124,6 +124,7 @@ class Character < ActiveRecord::Base
       end
     end
     #make yourself
+    
     nu_char = Character.new(
     name: page.search("#mw-content-text").search("p").search("b").first,
     species: results["species"],

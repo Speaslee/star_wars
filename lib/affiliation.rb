@@ -6,7 +6,7 @@ class Affiliation < ActiveRecord::Base
   has_many :characters, through: :memberships
 
 
-  def self.make_affiliation m
+  def make_affiliation m
     m = name
 
     self.create(
