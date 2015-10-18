@@ -6,12 +6,5 @@ class Affiliation < ActiveRecord::Base
   has_many :characters, through: :memberships
 
 
-  def make_affiliation m
-    m = name
-
-    self.create(
-    name: name
-    )
-  end
 
 end

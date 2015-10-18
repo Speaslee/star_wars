@@ -10,6 +10,8 @@ class App < Sinatra::Base
     s_name = params[:name]
     Character.where ({name: s_name})
 
+    picture_hashes = s.image_url.map do |u|
+      { image_name: s.name + ".jpg", image_url: s.image_url}
 
      {
        results: [{
@@ -33,27 +35,27 @@ class App < Sinatra::Base
   # s_name = params[:name]
   # s = Character.find "name"
   #
-  # affiliation_hashes = t.affiliations.map do |u|
+  # affiliation_hashes = s.affiliations.map do |u|
   #   { name: u.name }
+  #end
+  #
+  #
+  # picture_hashes = s.image_url.map do |u|
+  #   { image_name: s.name+".jpg", image_url: s.image_url}
   #
   #
   #
   #
-  #
-  #
-  #
-  #
-  #   {
-  #     results= [{
+  #   
+  #     results= {
   #     name: s.name,
   #     species: s.species,
   #     gender: s.gender,
   #     homeworld: s.homeworld,
-  #     image_url: s.name+'.jpg', s.image_url,
+  #     image_url: picture_hashes
   #     affiliation: affiliation_hashes
   #
-  #   }]
-  # }.to_json
+  #   }.to_json
   #
 
   end
@@ -67,12 +69,11 @@ class App < Sinatra::Base
   #     { name: u.name }
   #   end
   #
-  #   {
-  #     results = [{
+  #
+  #     results = {
   #       name: t.name,
   #       characters: character_hashes
-  #   }]
-  # }.to_json
+  #   }.to_json
   # end
 end
 
