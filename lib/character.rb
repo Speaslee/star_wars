@@ -82,7 +82,7 @@ class Character < ActiveRecord::Base
         sub_sub_categories.shift
         sub_categories.push(nu_page)
       end
-      if !sub_sub_categories.any? || visited_page.count == 300 #was added for sake of not spending weekend running loop
+      if !sub_sub_categories.any? || visited_page.count == 80 #was added for sake of not spending weekend running loop, this will go forever and ever and ever
         break
       end
     end
@@ -95,6 +95,8 @@ class Character < ActiveRecord::Base
       if l.href.include?("About")|| l.href== nil || l.text == "Lifestyle" || l.href.include?("Entertainment") || l.text == "Administrators' noticeboard" || l.text == "Wookieepedia in other languages" || l.text == "Browse articles by category"  || l.text == "On the Wiki" || l.text == "Main page"
         next
       elsif l.href.include?("talk") || l.href.include?("Lifestyle_Hub") ||l.href.include?("Music") ||l.href.include?("Comics") ||l.href.include?("Games") ||l.href.include?("Books") ||l.href.include?("TV")||l.href.include?("http://www.wikia.com")
+        next
+      elsif l.href.include?("Categoria") || l.href.include?("Licensing") || l.href.include?("Community_Central") || l.href.include?("Categoriepagina") #there needs to be a better way to do this. first thing to change
         next
       elsif l.href.include?("Kategori") || l.href.include?("Ategor%C3%ADa:Individuos_de_la_Alianza_Gal%C3%A1ctica") || l.href.include?("Cat%C3%A9gorie") || l.href.include?("Help") || l.text =="Español" ||l.href.include?("#")|| l.href.include?("Main_Page")
         next
@@ -110,6 +112,8 @@ class Character < ActiveRecord::Base
     character_links.each do |page|
       page = character_links.first.click
       puts "now on #{page.uri}"
+
+
       character_links.shift
     bio_table = page.search("#Character_infobox")
     if bio_table.count == 1
@@ -132,7 +136,8 @@ class Character < ActiveRecord::Base
     #make yourself
 
     nu_char = Character.new(
-    name: page.search("#mw-content-text").search("p").search("b").first,
+    name: bio_table.search("tr").search("th").text.split('\n').first,
+    url: page.uri,
     species: results["Species"],
     gender: results["Gender"],
     homeworld: results["Homeworld"],
@@ -145,6 +150,8 @@ class Character < ActiveRecord::Base
     rescue => e
       puts "Failed to save #{nu_char} - #{e}"
     end
+
+
 
     #make membership table
     results["Affiliation"]

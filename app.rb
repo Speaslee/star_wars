@@ -46,7 +46,7 @@ class App < Sinatra::Base
 
 
       results= {
-      name: s.name,
+      name: s.name.split("\n")[0],#added because of database population mistake. Fixed mistake for future populations but did not want to rerun populate_table
       species: s.species,
       gender: s.gender,
       homeworld: s.homeworld,
